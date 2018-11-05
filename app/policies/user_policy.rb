@@ -7,6 +7,6 @@ class UserPolicy < ApplicationPolicy
   end
   def update?
     (user.id == record.id ||
-        Company::AdminPermissionsService.new(user, record.category).has_rights?)
+        Company::AdminPermissionsService.new(user, record.company).has_rights?)
   end
 end

@@ -9,7 +9,7 @@ class CompanyDecorator < Draper::Decorator
   end
 
   def show_json
-    @show_json||= show_json.merge(
+    @show_json||= base_json.merge(
        users: users.decorate.map(&:company_json)
     )
   end

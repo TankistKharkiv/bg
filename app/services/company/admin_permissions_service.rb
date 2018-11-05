@@ -1,13 +1,13 @@
 class Company::AdminPermissionsService
-  attr_accessor :admin, :category
+  attr_accessor :admin, :company
 
-  def new(admin, category)
+  def initialize(admin, company)
     self.admin = admin
-    self.category = category
+    self.company = company
   end
 
   def has_rights?
-    adm_cat =admin.category
-    adm_cat == category || (adm_cat.lft<category.lft && adm_cat>category.rgt)
+    adm_com =admin.company
+    adm_com == company || (adm_com.lft<company.lft && adm_com.rgt>company.rgt)
   end
 end

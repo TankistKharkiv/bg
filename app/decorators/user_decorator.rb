@@ -10,13 +10,14 @@ class UserDecorator < Draper::Decorator
   #     end
   #   end
 
-  alias :show_json :index_json
+
 
   def show_json
     base_json.merge({
           company: company.decorate.base_json
         })
   end
+
 
   def base_json
     @base_json||={
@@ -25,5 +26,6 @@ class UserDecorator < Draper::Decorator
         last_name: last_name,
     }
   end
-
+  alias_method :index_json,:show_json
+  alias_method :company_json, :base_json
 end
