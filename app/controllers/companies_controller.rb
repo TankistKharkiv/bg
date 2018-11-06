@@ -1,5 +1,5 @@
-class CompanyController < ApplicationController
-  prepend_before_action :set_company
+class CompaniesController < ApplicationController
+  prepend_before_action :set_company, only: [:show, :update]
 
   def index
     render json: Company.decorate.map(&:index_json)

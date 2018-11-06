@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   scope '/api', defaults: { format: :json } do
     devise_for :users, controllers: {sessions: 'sessions'},
                defaults: { format: :json }
-    resources :company, only: [:index, :show, :update]
-    resources :user, only: [:index, :show, :update]
+    resources :companies, only: [:index, :show, :update]
+    resources :users, only: [:index, :show, :update]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
