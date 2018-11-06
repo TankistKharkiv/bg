@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
   def check_policy
     authorize(record, :update?)
   rescue Pundit::NotAuthorizedError
-    render json: {error: 'You have no rights for update'}
+    render json: {error: 'You have not rights for update'}
   end
 
 
