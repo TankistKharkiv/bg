@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def update
     service = User::UpdateService.new(@user, params)
     if service.call
-      render json: {success: true}
+      render json: {success: true, user: service.user.decorate.show_json}
     else
       render json: {success: false, errors: service.errors}
     end

@@ -3,12 +3,11 @@ require 'rails_helper'
 RSpec.describe "Sessions", type: :request do
 
     describe 'user can login with valid data' do
+      let(:user){FactoryGirl.create(:user, email: 'john@doe.com')}
       before(:each) do
-        @user = FactoryGirl.create(:user)
-
         post '/api/users/sign_in', params:{
             user:
-                {email: 'john@doe.com', password: 'password'}
+                {email: user.email, password: 'password'}
         }, as: :json
       end
       it "response has 200 code" do

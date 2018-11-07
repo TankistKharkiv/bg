@@ -1,26 +1,32 @@
 FactoryGirl.define do
   factory :company do
-    name 'some company'
+    name {Faker::Company.unique.bs}
+    after(:create) do |company|
+      company.users = create_list(:user,3,  company: company)
+    end
   end
 
   factory :company_tree, class: Company do
-    name 'main company'
+    name {Faker::Company.unique.bs}
     after(:create) do |parent|
-      parent.children = create_list(:company, 2)
+      parent.children = create_list(:company, 2,  parent: parent)
+      parent.users = create_list(:user,3,  company: parent)
     end
   end
   factory :two_level_company_tree, class: Company do
-    name 'general company'
+    name {Faker::Company.unique.bs}
     after(:create) do |parent|
-      parent.children = create_list(:company_tree, 2)
+      parent.children = create_list(:company_tree, 2, parent: parent)
+      parent.users = create_list(:user,3,  company: parent)
     end
+
   end
 
 
   factory :user do
-    email 'john@doe.com'
-    first_name 'John'
-    last_name 'Doe'
+    email {Faker::Internet.unique.email}
+    first_name {Faker::Name.first_name}
+    last_name {Faker::Name.last_name}
     password 'password'
     password_confirmation 'password'
     role 0

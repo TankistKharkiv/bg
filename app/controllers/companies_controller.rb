@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   prepend_before_action :set_company, only: [:show, :update]
 
   def index
-    render json: Company.decorate.map(&:index_json)
+    render json: Company.top_level.decorate.map(&:index_json)
   end
 
   def show
@@ -12,7 +12,7 @@ class CompaniesController < ApplicationController
   def update
     service = Company::UpdateService.new(@company, params)
     if service.call
-      render json: {success: true}
+      render json: {success: true, company: service.company.decorate.show_json}
     else
       render json: {success: false, errors: service.errors}
     end
