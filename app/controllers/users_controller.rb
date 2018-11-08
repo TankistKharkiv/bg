@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   prepend_before_action :set_user, only: [:show, :update]
   def index
-    render json: User.decorate.map(&:index_json)
+    render json: User.with_company.decorate.map(&:index_json)
   end
 
   def show

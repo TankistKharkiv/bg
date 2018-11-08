@@ -20,5 +20,7 @@
 class Company < ApplicationRecord
   acts_as_nested_set
   has_many :users
-  scope :top_level, ->(){where(parent_id: nil)}
+  scope :top_level, ->{where(parent_id: nil)}
+  scope :with_users, ->{includes(:users)}
+  scope :with_children, ->{eager_load(:children)}
 end

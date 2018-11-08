@@ -7,7 +7,8 @@ class Company::AdminPermissionsService
   end
 
   def has_rights?
-    adm_com =admin.company
-    adm_com == company || (adm_com.lft<company.lft && adm_com.rgt>company.rgt)
+    company.is_or_is_descendant_of? admin.company
+    # adm_com =admin.company
+    # adm_com == company || (adm_com.lft<company.lft && adm_com.rgt>company.rgt)
   end
 end

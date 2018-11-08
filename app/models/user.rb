@@ -36,4 +36,6 @@ class User < ApplicationRecord
   enum role: {user: 0, admin: 1, superadmin: 2}
 
   belongs_to :company
+
+  scope :with_company, ->{includes(:company)}
 end

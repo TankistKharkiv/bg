@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   prepend_before_action :set_company, only: [:show, :update]
 
   def index
-    render json: Company.top_level.decorate.map(&:index_json)
+    render json: Company.top_level.with_users.with_children.decorate.map(&:index_json)
   end
 
   def show

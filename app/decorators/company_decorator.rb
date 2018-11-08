@@ -4,7 +4,7 @@ class CompanyDecorator < Draper::Decorator
 
   def index_json
       @index_json||=base_json.merge(
-          children: children.decorate.map(&:index_json)
+          children: children.with_children.decorate.map(&:index_json)
       )
   end
 
